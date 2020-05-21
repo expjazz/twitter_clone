@@ -1,10 +1,25 @@
-<div class="ui card">
-  <%= image_tag @user.image.variant(resize_to_fit: [300, 200]) %>
-  <img src="/images/avatar/large/steve.jpg">
-  <div class="content">
-    <a class="header" href="#">Steve Jobes</a>
-    <div class="meta">
-      <a>Last Seen 2 days ago</a>
-    </div>
+<div class="ui grid container segment">
+  <div class="four wide column">
+    <div class="ui card">
+      <%= image_tag @user.image, size: '250x250' %>
+      <img src="/images/avatar/large/steve.jpg">
+      <div class="content">
+        <h5 class="header"><%= @user.name%></h5>
+        <div class="meta">
+          <p> <%= @user.username%> </p>
+          <p> <%= @user.email %> </p>
+        </div>
+        <div class="meta custom-mt-1">
+          <%= link_to "Edit your profile", edit_user_registration_path, class: "ui secondary button"%>
+          
+        </div>
+      </div>
+    </div>  
+  
   </div>
+  <div class="six wide column">
+    <h2>Test</h2>
+  </div>
+
+
 </div>
