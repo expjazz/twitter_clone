@@ -8,8 +8,9 @@ gem 'rails', '~> 6.0.3'
 gem 'jquery-rails'
 gem 'redis'
 gem 'devise'
-
-
+gem 'devise-semantified', git: 'https://github.com/ajex13/devise-semantified.git'
+gem 'image_processing', '1.9.3'
+gem 'active_storage_validations', '0.8.2'
 # Use Puma as the app server
 gem 'puma', '~> 4.1'
 # Use SCSS for stylesheets

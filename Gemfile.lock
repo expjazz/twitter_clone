@@ -1,3 +1,9 @@
+GIT
+  remote: https://github.com/ajex13/devise-semantified.git
+  revision: 0724fc3bda333d7540f28e1fd60774e116d6fc9c
+  specs:
+    devise-semantified (0.1.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -37,6 +43,8 @@ GEM
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.1, >= 1.2.0)
+    active_storage_validations (0.8.2)
+      rails (>= 5.2.0)
     activejob (6.0.3.1)
       activesupport (= 6.0.3.1)
       globalid (>= 0.3.6)
@@ -87,6 +95,8 @@ GEM
       activesupport (>= 4.2.0)
     i18n (1.8.2)
       concurrent-ruby (~> 1.0)
+    image_processing (1.9.3)
+      ruby-vips (>= 2.0.13, < 3)
     jbuilder (2.10.0)
       activesupport (>= 5.0.0)
     jquery-rails (4.4.0)
@@ -157,6 +167,8 @@ GEM
     responders (3.0.0)
       actionpack (>= 5.0)
       railties (>= 5.0)
+    ruby-vips (2.0.17)
+      ffi (~> 1.9)
     rubyzip (2.3.0)
     sass (3.7.4)
       sass-listen (~> 4.0.0)
@@ -224,11 +236,14 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_storage_validations (= 0.8.2)
   bcrypt (~> 3.1.7)
   bootsnap (>= 1.4.2)
   byebug
   capybara (>= 2.15)
   devise
+  devise-semantified!
+  image_processing (= 1.9.3)
   jbuilder (~> 2.7)
   jquery-rails
   listen (~> 3.2)
