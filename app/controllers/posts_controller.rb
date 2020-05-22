@@ -1,19 +1,34 @@
+# frozen_string_literal: true
+
 class PostsController < ApplicationController
   def new
+    @post = Post.new
   end
 
-  def edit
+  def create
+    @post = Post.new(post_params)
+    @post.user = current_user
+    byebug
+    if @post.save
+      redirect_to root_path
+    else
+      render 'new'
+    end
   end
 
-  def show
-  end
+  def edit; end
 
-  def update
-  end
+  def show; end
 
-  def destroy
-  end
+  def update; end
 
-  def index
+  def destroy; end
+
+  def index; end
+
+  private
+
+  def post_params
+    params.require(:post).permit(:body, :title, :image)
   end
 end

@@ -46,3 +46,8 @@ $space-amounts: (1, 2, 3, 4, 5);
     padding-right: #{$space}rem;
   }
 }
+
+.feed-image {
+  height: 100px !important;
+  width: 200px !important;
+}

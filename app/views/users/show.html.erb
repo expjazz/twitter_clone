@@ -1,8 +1,9 @@
 <div class="ui grid container segment">
   <div class="four wide column">
     <div class="ui card">
-      <%= image_tag @user.image, size: '250x250' %>
-      <img src="/images/avatar/large/steve.jpg">
+      <% if @user.image.attached? %>
+        <%= image_tag @user.image, size: '250x250' %>
+      <% end %>
       <div class="content">
         <h5 class="header"><%= @user.name%></h5>
         <div class="meta">
@@ -13,13 +14,52 @@
           <%= link_to "Edit your profile", edit_user_registration_path, class: "ui secondary button"%>
           
         </div>
+
+        <div class="meta">
+          <% @user.friendship_requests.each do |user| %>
+          <%= link_to "Accept #{user.name} as Friend", accept_request_user_path(user) %>
+            <p> <%= user.name %> </p>
+          <% end %>
+        </div>
       </div>
     </div>  
   
   </div>
   <div class="six wide column">
-    <h2>Test</h2>
-  </div>
+    <div class="ui feed">
+       <% @user.posts.each do |post| %> 
+        <div class="event">
+          <div class="content">
+            <div class="summary">
+              <a class="user">
+                You
+              </a> Posted this
+              <div class="date">
+                post.created_at
+              </div>
+            </div>
+            <% if post.body %>
+              <div class="extra text">
+                <%= post.body %>
+              </div>
+            <% end %>
+            <% if post.image %>
+                <div class="extra images">
+                  <%= image_tag post.image, class: 'feed-image'%>
+                </div>
+            <% end %>
+            <div class="meta">
+              <a class="like">
+                <i class="like icon"></i> 4 Likes
+              </a>
+            </div>
+        
+      </div>
+    </div>
+  <% end %>  
+
+
+
 
 
 </div>
