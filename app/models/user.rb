@@ -9,6 +9,7 @@ class User < ApplicationRecord
   has_many :requests_received, class_name: 'Relationship', foreign_key: 'followed_id'
   has_many :following, through: :requests_sent, source: :followed
   has_many :followers, through: :requests_received, source: :follower
+  has_many :comments
 
   has_one_attached :image
   devise :database_authenticatable, :registerable,
@@ -22,21 +23,34 @@ class User < ApplicationRecord
   end
 
   def accept_friend(friend_id)
-    unless friends.include?(User.find(friend_id))
-      following << User.find(friend_id)
-    end
     request = Relationship.find_by(follower_id: friend_id, followed_id: id)
     request.status = true
     request.save
-    request = Relationship.find_by(follower_id: id, followed_id: friend_id)
-    request.status = true
-    request.save
+  end
+
+  def friendship_accepted?(friend_id)
+    relationship = Relationship.find_by(follower_id: friend_id, followed_id: id)
+    relationship2 = Relationship.find_by(follower_id: id, followed_id: friend_id)
+    if following.include?(friend_id) || friend_id.following.include?(self)
+      return true if relationship && relationship.status == true
+      return true if relationship2 && relationship2.status == true
+    end
+    false
   end
 
   def friendship_requests
     requests = []
     followers.each do |user|
       relationship = Relationship.find_by(follower_id: user.id, followed_id: id)
+      requests << user if relationship.status != true
+    end
+    requests
+  end
+
+  def friendship_requests_send
+    requests = []
+    following.each do |user|
+      relationship = Relationship.find_by(follower_id: id, followed_id: user.id)
       requests << user if relationship.status != true
     end
     requests

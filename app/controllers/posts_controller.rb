@@ -8,7 +8,6 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.user = current_user
-    byebug
     if @post.save
       redirect_to root_path
     else
