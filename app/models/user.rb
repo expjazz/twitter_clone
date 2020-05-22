@@ -21,9 +21,13 @@ class User < ApplicationRecord
   end
 
   def accept_friend(friend_id)
+    unless friends.include?(User.find(friend_id))
+      following << User.find(friend_id)
+    end
     request = Relationship.find_by(follower_id: friend_id, followed_id: id)
     request.status = true
     request.save
+    byebug
   end
 
   def friendship_requests
@@ -41,6 +45,7 @@ class User < ApplicationRecord
       relationship = Relationship.find_by(follower_id: id, followed_id: user.id)
       friends << user if relationship.status == true
     end
+
     friends
   end
 end

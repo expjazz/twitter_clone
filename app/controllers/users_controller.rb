@@ -12,5 +12,6 @@ class UsersController < ApplicationController
 
   def accept_request
     current_user.accept_friend(params[:id])
+    redirect_to root_path
   end
 end
