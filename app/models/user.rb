@@ -4,6 +4,7 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   has_many :posts
+  has_many :likes
   has_many :requests_sent, class_name: 'Relationship', foreign_key: 'follower_id'
   has_many :requests_received, class_name: 'Relationship', foreign_key: 'followed_id'
   has_many :following, through: :requests_sent, source: :followed
@@ -27,7 +28,9 @@ class User < ApplicationRecord
     request = Relationship.find_by(follower_id: friend_id, followed_id: id)
     request.status = true
     request.save
-    byebug
+    request = Relationship.find_by(follower_id: id, followed_id: friend_id)
+    request.status = true
+    request.save
   end
 
   def friendship_requests

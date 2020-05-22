@@ -8,7 +8,11 @@ Rails.application.routes.draw do
       get :accept_request
     end
   end
-  resources :posts
+  resources :posts do
+    member do
+      get :likes
+    end
+  end
   resources :relationships, only: %i[create]
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

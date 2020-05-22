@@ -48,6 +48,12 @@
             <%= f.label :password_confirmation %>
             <%= f.password_field :password_confirmation, autocomplete: "off" ,placeholder: "Confirm Password" %>
           </div>
+          <div class="field ">
+            <%= f.label :description %>
+            <%= f.text_area :description, autofocus: true ,placeholder: "Tell whom you are"%>
+          </div>
+
+
           <%= f.file_field :image %>
           <div class="ui left icon input">
             <%= f.submit "Sign up" ,class: "ui submit button primary " %>

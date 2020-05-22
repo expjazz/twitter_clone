@@ -16,6 +16,14 @@ class PostsController < ApplicationController
     end
   end
 
+  def likes
+    like = Like.new
+    like.user = current_user
+    like.post = Post.find(params[:id])
+    like.save
+    redirect_to root_path
+  end
+
   def edit; end
 
   def show; end
