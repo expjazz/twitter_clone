@@ -1,0 +1,73 @@
+     <div class="ui feed">
+       <% @posts.each do |post| %> 
+        <div class="event">
+          <div class="content">
+            <div class="summary">
+              <a class="user">
+                <%= 'You' if post.user == current_user %>
+                <%= post.user.name if post.user != current_user %>
+              </a> Posted this
+              <div class="date">
+                post.created_at
+              </div>
+            </div>
+            <% if post.body %>
+              <div class="extra text">
+                <%= post.body %>
+              </div>
+            <% end %>
+            <% if post.image %>
+                <div class="extra images">
+                  <%= image_tag post.image, class: 'feed-image'%>
+                </div>
+            <% end %>
+            <div class="meta">
+              <% if post.likes_finder(current_user) %>
+                <%= link_to likes_post_path(post), class: 'like' do %>
+                  <i class="like icon"></i> <%= post.likes.count %>
+                <% end %>
+              <% else %>
+                  <i class="like icon"></i> <%= post.likes.count %>
+                  <i class="comment icon"></i> <%= post.comments.count%> Comments
+              <% end %>
+            </div>
+            <div class="ui comments">
+  <h3 class="ui dividing header">Comments</h3>
+            <% if post.comments.size.zero?%>
+            <div class="actions">
+              <%= form_with(model: [post, Comment.new], local: true) do |f| %>
+                <%= f.label :comment %>
+                <%= f.text_field :body %>
+              <% end %>
+            </div>
+          <% end %>
+    <% post.comments_valid.each do |comm| %>
+
+      <div class="comment">
+        <%= link_to user_path(comm.user), class: 'avatar' do %>
+          <%= image_tag comm.user.image %>
+        <% end %>
+        <div class="content">
+          <%= link_to comm.user.name, user_path(comm.user), class: 'author' %>
+          <div class="metadata">
+            <span class="date">Today at <%= comm.created_at %> </span>
+          </div>
+          <div class="text">
+            <%= comm.body %>
+          </div>
+          <% if comm == post.comments.last || post.comments.size.zero?%>
+            <div class="actions">
+              <%= form_with(model: [post, Comment.new], local: true) do |f| %>
+                <%= f.label :comment %>
+                <%= f.text_field :body %>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>  
+</div>
+</div>
+</div>  
+</div>  

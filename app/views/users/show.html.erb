@@ -26,37 +26,7 @@
   
   </div>
   <div class="six wide column">
-    <div class="ui feed">
-       <% @user.posts.each do |post| %> 
-        <div class="event">
-          <div class="content">
-            <div class="summary">
-              <a class="user">
-                You
-              </a> Posted this
-              <div class="date">
-                post.created_at
-              </div>
-            </div>
-            <% if post.body %>
-              <div class="extra text">
-                <%= post.body %>
-              </div>
-            <% end %>
-            <% if post.image %>
-                <div class="extra images">
-                  <%= image_tag post.image, class: 'feed-image'%>
-                </div>
-            <% end %>
-            <div class="meta">
-              <a class="like">
-                <i class="like icon"></i> 4 Likes
-              </a>
-            </div>
-        
-      </div>
-    </div>
-  <% end %>  
+    <%= render 'welcome/feed' %>
 </div>
 </div>
-</div>
+

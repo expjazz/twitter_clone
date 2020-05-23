@@ -1,50 +1,7 @@
 <div class="ui container segment">
 
   <div class="ui centered grid">
-  
-      <div class="ui feed">
-       <% @posts.each do |post| %> 
-        <div class="event">
-          <div class="content">
-            <div class="summary">
-              <a class="user">
-                <%= 'You' if post.user == current_user %>
-                <%= post.user.name if post.user != current_user %>
-              </a> Posted this
-              <div class="date">
-                post.created_at
-              </div>
-            </div>
-            <% if post.body %>
-              <div class="extra text">
-                <%= post.body %>
-              </div>
-            <% end %>
-            <% if post.image %>
-                <div class="extra images">
-                  <%= image_tag post.image, class: 'feed-image'%>
-                </div>
-            <% end %>
-            <div class="meta">
-              <% if post.likes_finder(current_user) %>
-                <%= link_to likes_post_path(post), class: 'like' do %>
-                  <i class="like icon"></i> <%= post.likes.count %>
-                <% end %>
-              <% else %>
-                  <i class="like icon"></i> <%= post.likes.count %>
-              <% end %>
-            </div>
-            <% post.comments_valid.each do |comm| %>
-              <p> <%= comm.body %> </p>
-              <p> <%= comm.user.name %> </p>
-            <% end %>
-            <%= form_with(model: [post, Comment.new], local: true) do |f| %>
-              <%= f.label :comment %>
-              <%= f.text_field :body %>
-            <% end %>
-      </div>
-    </div>
-  <% end %>  
-</div>
-</div>
+    <%= render 'welcome/feed'%> 
+ 
+</div> 
 </div>  

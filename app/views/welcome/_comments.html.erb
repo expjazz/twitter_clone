@@ -1,0 +1,88 @@
+<div class="ui comments">
+  <h3 class="ui dividing header">Comments</h3>
+    <% post.comments_valid.each do |comm| %>
+
+      <div class="comment">
+        <%= link_to comm.user.name, user_path(comm.user), class: 'author' do %>
+        <a class="avatar">
+          <%= image_tag comm.user.image %>
+        <% end %>
+        <div class="content">
+          <%= link_to comm.user.name, user_path(comm.user), class: 'author' %>
+          <div class="metadata">
+            <span class="date">Today at <%= comm.created_at %> </span>
+          </div>
+          <div class="text">
+            <%= comm.body %>
+          </div>
+          <div class="actions">
+            <%= form_with(model: [post, Comment.new], local: true) do |f| %>
+              <%= f.label :comment %>
+              <%= f.text_field :body %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <div class="comment">
+    <a class="avatar">
+      <img src="/images/avatar/small/elliot.jpg">
+    </a>
+    <div class="content">
+      <a class="author">Elliot Fu</a>
+      <div class="metadata">
+        <span class="date">Yesterday at 12:30AM</span>
+      </div>
+      <div class="text">
+        <p>This has been very useful for my research. Thanks as well!</p>
+      </div>
+      <div class="actions">
+        <a class="reply">Reply</a>
+      </div>
+    </div>
+    <div class="comments">
+      <div class="comment">
+        <a class="avatar">
+          <img src="/images/avatar/small/jenny.jpg">
+        </a>
+        <div class="content">
+          <a class="author">Jenny Hess</a>
+          <div class="metadata">
+            <span class="date">Just now</span>
+          </div>
+          <div class="text">
+            Elliot you are always so right :)
+          </div>
+          <div class="actions">
+            <a class="reply">Reply</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="comment">
+    <a class="avatar">
+      <img src="/images/avatar/small/joe.jpg">
+    </a>
+    <div class="content">
+      <a class="author">Joe Henderson</a>
+      <div class="metadata">
+        <span class="date">5 days ago</span>
+      </div>
+      <div class="text">
+        Dude, this is awesome. Thanks so much
+      </div>
+      <div class="actions">
+        <a class="reply">Reply</a>
+      </div>
+    </div>
+  </div>
+  <form class="ui reply form">
+    <div class="field">
+      <textarea></textarea>
+    </div>
+    <div class="ui blue labeled submit icon button">
+      <i class="icon edit"></i> Add Reply
+    </div>
+  </form>
+</div>
