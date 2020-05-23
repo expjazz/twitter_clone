@@ -58,9 +58,15 @@ class User < ApplicationRecord
 
   def friends
     friends = []
+
     following.each do |user|
-      relationship = Relationship.find_by(follower_id: id, followed_id: user.id)
-      friends << user if relationship.status == true
+      relationship = Relationship.find_by(follower_id: user.id, followed_id: id)
+      relationship2 = Relationship.find_by(follower_id: id, followed_id: user.id)
+      if relationship && relationship.status == true
+        friends << user unless friends.include?(user)
+      elsif relationship2 && relationship2.status == true
+        friends << user unless friends.include?(user)
+      end
     end
 
     friends
