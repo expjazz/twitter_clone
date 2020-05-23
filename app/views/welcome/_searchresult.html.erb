@@ -1,0 +1,37 @@
+<% if @post_result %>
+  <% @post_result.each do |post| %>
+        <div class="event">
+          <div class="content">
+            <div class="summary">
+              <a class="user">
+                <%= 'You' if post.user == current_user %>
+                <%= post.user.name if post.user != current_user %>
+              </a> Posted this
+              <div class="date">
+                post.created_at
+              </div>
+            </div>
+            <% if post.body %>
+              <div class="extra text">
+                <%= post.body %>
+              </div>
+            <% end %>
+            <% if post.image %>
+                <div class="extra images">
+                  <%= image_tag post.image, class: 'feed-image'%>
+                </div>
+            <% end %>
+            <div class="meta">
+              <% if post.likes_finder(current_user) %>
+                <%= link_to likes_post_path(post), class: 'like' do %>
+                  <i class="like icon"></i> <%= post.likes.count %>
+                <% end %>
+              <% else %>
+                  <i class="like icon"></i> <%= post.likes.count %>
+                  <i class="comment icon"></i> <%= post.comments.count%> Comments
+              <% end %>
+            </div>
+</div>
+</div>      
+  <% end %>
+<% end %>

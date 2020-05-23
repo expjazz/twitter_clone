@@ -15,4 +15,11 @@ class UsersController < ApplicationController
     current_user.accept_friend(params[:id])
     redirect_to root_path
   end
+
+  def search
+    @users = User.all
+    @friends = current_user.friends
+    @user_result = User.search(params[:user])
+    render 'users/index'
+  end
 end

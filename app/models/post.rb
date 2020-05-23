@@ -16,4 +16,9 @@ class Post < ApplicationRecord
   def comments_valid
     comments || []
   end
+
+  def self.search(param)
+    all = Post.all
+    all.select { |post| post.body.include?(param) }
+  end
 end

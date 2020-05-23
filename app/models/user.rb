@@ -65,4 +65,9 @@ class User < ApplicationRecord
 
     friends
   end
+
+  def self.search(name)
+    all = User.all
+    all.select { |user| user.name.include?(name) }
+  end
 end

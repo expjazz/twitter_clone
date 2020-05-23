@@ -1,49 +1,14 @@
 
 <div class="ui container segment">
-<div class="ui link cards">
-
-  <% @users.each do |user| %>
-    <% if user != current_user %>
-      <div class="card">
-        <div class="image">
-          <%  if user.image.attached? %>
-            <%=  image_tag user.image, size: '250x250'%> 
-          <% end %>
-        
-        <div class="content">
-          <div class="header"> <%= user.name %> </div>
-          <div class="meta">
-          
-            <% if current_user.friendship_accepted?(user) %>
-              <%= link_to 'Friends', '#' %>
-            <% elsif !current_user.friendship_accepted?(user)%>
-                <% if current_user.friendship_requests_send.include?(user)%>
-                    <p> Waiting for confirmation </p>
-                <% else %>
-                  <%= form_with(url: relationships_path) do |f| %>
-                  <%= hidden_field_tag('User', value = user.id)%>
-                  <%= f.submit 'Add Friend'%>
-                  <% end %>
-                <% end %>
-            <% end %>
-          </div>
-
-          <div class="description">
-            <%= user.description %>
-          </div>
-        </div>
-        <div class="extra content">
-          <span class="right floated">
-            <%= user.created_at %>
-          </span>
-          <span>
-            <i class="user icon"></i>
-            <%= user.friends.count %>
-            Friends
-          </span>
-        </div>
-      </div>
-    <% end %>
-  <% end %>
+  <div class="ui centered grid">
+    <div class="four wide column">
+      <%= render 'users/searchusers'%>
+    </div>
+    <div class="eight wide column">
+      <div class="ui link cards">
+        <%= render 'users/users'%>
+      </div>      
+    </div>
+  </div>
 </div>
-</div>
+
